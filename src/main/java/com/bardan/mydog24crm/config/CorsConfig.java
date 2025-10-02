@@ -11,7 +11,11 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         // Zezwalaj na połączenia z lokalnego front-endu (deweloperskie)
         registry.addMapping("/**") // dotyczy wszystkich ścieżek API
-                .allowedOrigins("http://localhost:58515") // DODAJ DOKŁADNIE TEN PORT I SCHEMAT
+                .allowedOrigins(
+                        "http://localhost:58515",
+                        "https://mydog24crm.web.app/",
+                        "https://mydog24crm.firebaseapp.com/"
+                ) // DODAJ DOKŁADNIE TEN PORT I SCHEMAT
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
