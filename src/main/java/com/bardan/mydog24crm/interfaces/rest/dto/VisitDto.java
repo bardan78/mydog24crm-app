@@ -1,13 +1,12 @@
 package com.bardan.mydog24crm.interfaces.rest.dto;
 
 import com.bardan.mydog24crm.domain.Visit;
-import lombok.Data;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-@Data
+@Getter
 public class VisitDto {
 
     private Long id;
