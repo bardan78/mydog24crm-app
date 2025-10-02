@@ -5,6 +5,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,11 +16,15 @@ public class FirebaseConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(FirebaseConfig.class);
 
+    @Value("${app.security.firebase_project_id}")
+    private String firebaseProjectId;
+
     @Bean
     public FirebaseApp firebaseApp() throws IOException {
         // When running on GCP (like Cloud Run), the SDK automatically finds the project credentials.
         // No need to manage a service account key file.
         FirebaseOptions options = FirebaseOptions.builder()
+                .setProjectId(firebaseProjectId)
                 .setCredentials(GoogleCredentials.getApplicationDefault())
                 .build();
 

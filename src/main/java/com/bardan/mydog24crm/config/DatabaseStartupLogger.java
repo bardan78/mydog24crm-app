@@ -1,21 +1,19 @@
 package com.bardan.mydog24crm.config;
 
 import com.bardan.mydog24crm.domain.DogRepository;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor // Lombok will create the constructor for final fields
 public class DatabaseStartupLogger implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(DatabaseStartupLogger.class);
 
     private final DogRepository dogRepository;
-
-    public DatabaseStartupLogger(DogRepository dogRepository) {
-        this.dogRepository = dogRepository;
-    }
 
     @Override
     public void run(String... args) throws Exception {

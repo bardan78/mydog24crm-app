@@ -24,7 +24,7 @@ public class ClientController {
     public List<DogDto> findClients(@RequestParam("q") String q) {
         Iterable<Dog> dogs = dogService.findDogByNameOrTelephone(q);
         return StreamSupport.stream(dogs.spliterator(), false)
-                .map(DogDto::new)
+                .map(DogDto::from) // Using the new factory method
                 .collect(Collectors.toList());
     }
 }

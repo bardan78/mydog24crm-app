@@ -1,34 +1,44 @@
 package com.bardan.mydog24crm.interfaces.rest.dto;
 
 import com.bardan.mydog24crm.domain.Visit;
-import lombok.Getter;
+import lombok.Value;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Getter
+/**
+ * A Data Transfer Object representing a Visit.
+ * This class is immutable.
+ */
+@Value // Lombok annotation for immutable value objects
 public class VisitDto {
 
-    private Long id;
-    private LocalDate visitDate;
-    private String visitHour;
-    private String description;
-    private BigDecimal price;
-    private Visit.ServiceType serviceType;
-    private Visit.Knife knife;
-    private Boolean withHair;
-    private Long duration;
+    Long id;
+    LocalDate visitDate;
+    String visitHour;
+    String description;
+    BigDecimal price;
+    Visit.ServiceType serviceType;
+    Visit.Knife knife;
+    Boolean withHair;
+    Long duration;
 
-    public VisitDto(Visit visit) {
-        this.id = visit.getId();
-        this.visitDate = visit.getVisitDate().toLocalDate();
-        this.visitHour = visit.getVisitHour();
-        this.description = visit.getDescription();
-        this.price = visit.getPrice();
-        this.serviceType = visit.getServiceType();
-        this.knife = visit.getKnife();
-        this.withHair = visit.getWithHair();
-        this.duration = visit.getDuration();
+    /**
+     * Factory method to create a VisitDto from a Visit entity.
+     * @param visit The Visit entity.
+     * @return A new VisitDto instance.
+     */
+    public static VisitDto from(Visit visit) {
+        return new VisitDto(
+                visit.getId(),
+                visit.getVisitDate().toLocalDate(),
+                visit.getVisitHour(),
+                visit.getDescription(),
+                visit.getPrice(),
+                visit.getServiceType(),
+                visit.getKnife(),
+                visit.getWithHair(),
+                visit.getDuration()
+        );
     }
-
 }

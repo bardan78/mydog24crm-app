@@ -1,36 +1,51 @@
 package com.bardan.mydog24crm.interfaces.rest.dto;
 
 import com.bardan.mydog24crm.domain.Dog;
-import lombok.Getter;
+import lombok.Value;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
+/**
+ * A Data Transfer Object representing a Dog and its visits.
+ * This class is immutable.
+ */
+@Value // Lombok annotation for immutable value objects
 public class DogDto {
 
-    private Long id;
-    private String breed;
-    private String name;
-    private String ownerName;
-    private String tel1;
-    private String tel2;
-    private String tel3;
-    private String email;
-    private LocalDate firstVisitDate;
-    private List<VisitDto> visits;
+    Long id;
+    String breed;
+    String name;
+    String ownerName;
+    String tel1;
+    String tel2;
+    String tel3;
+    String email;
+    LocalDate firstVisitDate;
+    List<VisitDto> visits;
 
-    public DogDto(Dog dog) {
-        this.id = dog.getId();
-        this.breed = dog.getBreed();
-        this.name = dog.getName();
-        this.ownerName = dog.getOwnerName();
-        this.tel1 = dog.getTel1();
-        this.tel2 = dog.getTel2();
-        this.tel3 = dog.getTel3();
-        this.email = dog.getEmail();
-        this.firstVisitDate = dog.getFirstVisitDate().toLocalDate();
-        this.visits = dog.getVisits().stream().map(VisitDto::new).collect(Collectors.toList());
+    /**
+     * Factory method to create a DogDto from a Dog entity.
+     * @param dog The Dog entity.
+     * @return A new DogDto instance.
+     */
+    public static DogDto from(Dog dog) {
+        List<VisitDto> visitDtos = dog.getVisits().stream()
+                .map(VisitDto::from) // Using the factory method from VisitDto
+                .collect(Collectors.toList());
+
+        return new DogDto(
+                dog.getId(),
+                dog.getBreed(),
+                dog.getName(),
+                dog.getOwnerName(),
+                dog.getTel1(),
+                dog.getTel2(),
+                dog.getTel3(),
+                dog.getEmail(),
+                dog.getFirstVisitDate() != null ? dog.getFirstVisitDate().toLocalDate() : null,
+                visitDtos
+        );
     }
 }
