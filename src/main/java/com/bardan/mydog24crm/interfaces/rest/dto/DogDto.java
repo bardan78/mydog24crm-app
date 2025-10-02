@@ -2,6 +2,7 @@ package com.bardan.mydog24crm.interfaces.rest.dto;
 
 import com.bardan.mydog24crm.domain.Dog;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ public class DogDto {
     private String tel2;
     private String tel3;
     private String email;
-    private LocalDateTime firstVisitDate;
+    private LocalDate firstVisitDate;
     private List<VisitDto> visits;
 
     public DogDto(Dog dog) {
@@ -28,7 +29,7 @@ public class DogDto {
         this.tel2 = dog.getTel2();
         this.tel3 = dog.getTel3();
         this.email = dog.getEmail();
-        this.firstVisitDate = dog.getFirstVisitDate();
+        this.firstVisitDate = dog.getFirstVisitDate().toLocalDate();
         this.visits = dog.getVisits().stream().map(VisitDto::new).collect(Collectors.toList());
     }
 

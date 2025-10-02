@@ -4,13 +4,14 @@ import com.bardan.mydog24crm.domain.Visit;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 public class VisitDto {
 
     private Long id;
-    private LocalDateTime visitDate;
+    private LocalDate visitDate;
     private String visitHour;
     private String description;
     private BigDecimal price;
@@ -21,7 +22,7 @@ public class VisitDto {
 
     public VisitDto(Visit visit) {
         this.id = visit.getId();
-        this.visitDate = visit.getVisitDate();
+        this.visitDate = visit.getVisitDate().toLocalDate();
         this.visitHour = visit.getVisitHour();
         this.description = visit.getDescription();
         this.price = visit.getPrice();
