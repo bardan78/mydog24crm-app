@@ -32,11 +32,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- GCP Secret Manager Starter -->
-        <dependency>
-            <groupId>com.google.cloud</groupId>
-            <artifactId>spring-cloud-gcp-starter-secretmanager</artifactId>
-        </dependency>
         <!-- GCP Cloud SQL Starter for PostgreSQL -->
         <dependency>
             <groupId>com.google.cloud</groupId>
